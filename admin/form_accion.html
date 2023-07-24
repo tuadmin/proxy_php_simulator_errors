@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="form_accion.js"></script>
+</head>
+<body>
+    <h1>Crear y Editar JSON</h1>
+    <form id="jsonForm">
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" required><br>
+
+        <label for="activo">Activo:</label>
+        <input type="checkbox" id="activo" name="activo"><br>
+
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion"><br>
+
+        <label for="coincidencia_url">coincidencia URL(preg_match Expresiones regulares por linea):</label>
+        <textarea id="coincidencia_url" name="coincidencia_url"></textarea><br>
+
+        <label for="coincidencia_texto">coincidencia Texto(preg_match Expresiones regulares por linea):</label>
+        <textarea id="coincidencia_texto" name="coincidencia_texto"></textarea><br>
+
+        <label for="retornar_texto">Retornar Texto:</label>
+        <textarea id="retornar_texto" name="retornar_texto"></textarea><br>
+
+        <label for="retornar_httpcode">Retornar HTTP Code:</label>
+        <input type="number" id="retornar_httpcode" name="retornar_httpcode" value="200"><br>
+        <label for="retornar_httpcode">Demorar en segundos:</label>
+        <input type="number" id="demorar" name="demorar" value="0"><br>
+
+        <input type="button" value="Crear/Editar JSON" onclick="crearEditarJSON()">
+    </form>
+
+    
+</body>
+<script>
+        
+    // Cargar el JSON en el formulario si ya existe (por ejemplo, cuando se edita)
+    var existingJSON = {
+        "id": "simular_corte",
+        "activo": true,
+        "descripcion": "Simula corte de internet",
+        "coincidencia_url": [],
+        "coincidencia_texto": [],
+        "retornar_texto": "<h1>Internet cortado</h1><p>El servicio de internet se encuentra cortado por falta de pago</p>",
+        "retornar_httpcode": 500
+    };
+
+    cargarJSON(existingJSON);
+</script>
+</html>
