@@ -66,10 +66,14 @@ if( $archivo_peticion!="/proxy.php" && trim($archivo_peticion,"/")!='' && file_e
             
             if($accion->coincide_url($peticion_url)){
                 http_response_code((int) $accion->retornar_httpcode);                
+                if($accion->retornar_mimetype){
+                    header("Content-Type: {$accion->retornar_mimetype}");
+                }
                 if($accion->retornar_texto != ""){
                     echo $accion->retornar_texto;
                     
                 }
+                
                 die();
             }
         }
@@ -120,10 +124,13 @@ if( $archivo_peticion!="/proxy.php" && trim($archivo_peticion,"/")!='' && file_e
                     
                     if($accion->coincide_texto($raw_data)){
                         http_response_code((int) $accion->retornar_httpcode);                
-                        if($accion->retornar_texto != ""){
-                            echo $accion->retornar_texto;
-                            
+                        if($accion->retornar_mimetype){
+                            header("Content-Type: {$accion->retornar_mimetype}");
                         }
+                        if($accion->retornar_texto != ""){
+                            echo $accion->retornar_texto;                            
+                        }
+                        
                         die();
                     }
                 }

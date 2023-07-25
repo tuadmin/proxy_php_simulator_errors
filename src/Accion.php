@@ -7,6 +7,7 @@ class Accion{
     public $coincidencia_texto=array();//debe ser un array con preg_match o texto
     public $retornar_texto = "";
     public $retornar_httpcode = 500;
+    public $retornar_mimetype = "text/xml";
     public $demorar = 0;
     public static function coincide($texto,$buscar){
         $buscar = trim($buscar);

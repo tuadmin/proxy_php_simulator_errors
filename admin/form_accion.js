@@ -8,6 +8,7 @@ function crearEditarJSON() {
         "coincidencia_texto": document.getElementById("coincidencia_texto").value.split('\n'),
         "retornar_texto": document.getElementById("retornar_texto").value,
         "retornar_httpcode": parseInt(document.getElementById("retornar_httpcode").value),
+        "retornar_mimetype": document.getElementById("retornar_mimetype").value,
         "demorar": parseInt(document.getElementById("demorar").value)
     };
 
@@ -28,6 +29,7 @@ function cargarJSON(jsonData) {
     document.getElementById("coincidencia_texto").value = jsonData.coincidencia_texto?jsonData.coincidencia_texto.join('\n'):'';
     document.getElementById("retornar_texto").value = jsonData.retornar_texto??'';
     document.getElementById("retornar_httpcode").value = jsonData.retornar_httpcode??200;
+    document.getElementById("retornar_mimetype").value = jsonData.retornar_mimetype??"";
     document.getElementById("demorar").value = jsonData.demorar??0;
     document.getElementById("formulario").style.display = "block";
 }
