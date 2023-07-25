@@ -21,7 +21,10 @@
               </div>              
             </div>
     </form>
-    <button onclick="cargarJSON({id:prompt('Nombre de su accion')})">+ Agregar nueva accion</button>    
+    <button type="button" onclick="cargarJSON({id:prompt('Nombre de su accion')})">+ Agregar nueva accion</button>
+    <button type="button" onclick="mostrarLogs()">Ver Ultimos logs</button>    
+    <section id="logs">
+    </section>
     <section id="formulario">
     </section>
     <table class="table">
@@ -38,5 +41,32 @@
         
     </table>
     <script src="main.js" type="module"></script>
+    <script>
+        function mostrarLogs(){
+            const contenedor = document.getElementById('logs');
+            contenedor.innerHTML='';
+            CALLBACK.listarLog().then(arr=>{ 
+                if(arr.length==0) return contenedor.innerText='No hay logs '+(new Date()).toLocaleString();               
+                arr.forEach(log=>{
+                    const code= document.createElement('code');
+                    code.style.whiteSpace='pre';
+                    code.style.display='none';
+                    code.style.fontFamily='monospace';
+                    code.style.fontSize='0.7em';
+                    code.style.overflow='auto';
+                    const div = document.createElement('div');
+                    const button = document.createElement('button');
+                    button.innerText='  ' +log.url;
+                    button.onclick=()=>{code.style.display=code.style.display=='none'?'block':'none'};
+                    code.innerText= log.respuesta;
+                    div.innerText = log.http_code?log.http_code:'';
+
+                    div.appendChild(button);
+                    div.appendChild(code);
+                    contenedor.appendChild(div);
+                })
+            });
+        }
+    </script>
 </body>
 </html>

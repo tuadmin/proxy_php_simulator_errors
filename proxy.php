@@ -149,5 +149,9 @@ if( $archivo_peticion!="/proxy.php" && trim($archivo_peticion,"/")!='' && file_e
     //var_dump($response);
     // Devolver el contenido de la respuesta del servidor de destino
     echo $response;
+    guardarRespuestaServidor($destination_url,$response,array(
+        'http_code'=>$http_code,
+        'content_type'=>$content_type,
+    ));
     die();
 }

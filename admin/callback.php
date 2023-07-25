@@ -24,6 +24,9 @@ class funcionesJs{
     function listar(){        
         return self::$lista;
     }
+    function listarLog(){
+        return obtenerRespuestaServidor();
+    }
     function obtener($id){
         foreach(self::$lista as $c){
             if($c->id == $id){

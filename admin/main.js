@@ -53,6 +53,9 @@ window.CALLBACK ={
     },
     listar: function () {
         return _peticionGet('listar');
+    },
+    listarLog:function(){
+        return _peticionGet('listarLog');
     }    
 }
 console.log(templateForm);
@@ -85,8 +88,12 @@ templateForm.then(html=>{
                 cargarJSON(json);
             };
             btnActivo.onclick = function(){
-                CALLBACK.activarAccion(json.id,!json.activo);
-                location.reload();
+                CALLBACK
+                .activarAccion(json.id,!json.activo)
+                .finally(()=>{
+                    location.reload();
+                });
+                
             };
             tdDescripcion.innerText = json.descripcion;
             
