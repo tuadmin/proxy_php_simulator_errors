@@ -79,12 +79,14 @@ templateForm.then(html=>{
             const btnActivo = document.createElement('button');
     
             const btnEditar = document.createElement('button');
-            
+            btnEditar.type = 'button';
+
             tdActivo.appendChild(btnActivo);
             tdId.appendChild(btnEditar);
             btnEditar.classList.add('btn','btn-warning');
             btnEditar.innerText = "✎ " +json.id;
-            btnEditar.onclick = function(){
+            btnEditar.onclick = function(e){
+                e.preventDefault();
                 cargarJSON(json);
             };
             btnActivo.onclick = function(){
