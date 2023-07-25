@@ -22,7 +22,7 @@
             </div>
     </form>
     <button type="button" onclick="cargarJSON({id:prompt('Nombre de su accion')})">+ Agregar nueva accion</button>
-    <button type="button" onclick="mostrarLogs()">Ver Ultimos logs</button>    
+    <button type="button" onclick="mostrarLogs()">Ver Ultimos 10 logs</button>    
     <section id="logs">
     </section>
     <section id="formulario">
@@ -49,19 +49,45 @@
                 if(arr.length==0) return contenedor.innerText='No hay logs '+(new Date()).toLocaleString();               
                 arr.forEach(log=>{
                     const code= document.createElement('code');
+                    const div = document.createElement('div');
+                    const span = document.createElement('span');
+                    const button = document.createElement('button');
+
+
                     code.style.whiteSpace='pre';
                     code.style.display='none';
                     code.style.fontFamily='monospace';
                     code.style.fontSize='0.7em';
                     code.style.overflow='auto';
-                    const div = document.createElement('div');
-                    const button = document.createElement('button');
+                    
+                    span.classList.add('badge');
+                    
+                    const http_code = parseInt(log.http_code?log.http_code:0);
+                    if(http_code==200){
+                        span.classList.add('bg-success');
+                    }else if(http_code>=500){
+                        span.classList.add('bg-danger');
+                    }else if(http_code>=400){
+                        span.classList.add('bg-warning');
+                        span.classList.add('text-dark');
+                    }else if(http_code>=300){
+                        span.classList.add('bg-info');
+                    }else if(http_code>200){
+                        span.classList.add('bg-primary');
+                    }else{
+                        span.classList.add('bg-secondary');
+                    }
+                    span.innerText= http_code;
+
                     button.type='button';
                     button.innerText='  ' +log.url;
-                    button.onclick=()=>{code.style.display=code.style.display=='none'?'block':'none'};
+                    button.onclick=(e)=>{
+                        e.preventDefault();
+                        code.style.display=code.style.display=='none'?'block':'none';
+                    };
                     code.innerText= log.respuesta;
-                    div.innerText = log.http_code?log.http_code:'';
-
+                    //div.innerText = log.http_code?log.http_code:'';
+                    div.appendChild(span);
                     div.appendChild(button);
                     div.appendChild(code);
                     contenedor.appendChild(div);
